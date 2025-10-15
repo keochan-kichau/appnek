@@ -39,7 +39,7 @@ export default function Login({ navigation }) {
       JSON.stringify({ username: u.username, email: u.email }),
     );
     // Sau đăng nhập -> Feed
-    navigation.reset({ index: 0, routes: [{ name: 'Feed' }] });
+    navigation.reset({ index: 0, routes: [{ name: 'Menu' }] });
   };
 
   return (

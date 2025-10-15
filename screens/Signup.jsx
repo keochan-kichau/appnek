@@ -39,7 +39,7 @@ export default function Signup({ navigation }) {
       CURRENT_USER_KEY,
       JSON.stringify({ username, email }),
     );
-    navigation.reset({ index: 0, routes: [{ name: 'Feed' }] });
+    navigation.reset({ index: 0, routes: [{ name: 'Menu' }] });
   };
 
   return (

@@ -12,8 +12,10 @@ import Signup from './screens/Signup.jsx';
 import Forgot from './screens/Forgot.jsx';
 
 // Màn sau đăng nhập + chi tiết
-import Feed from './Feed.jsx';
-import Details from './Details.jsx';
+import Expert from './Expert.jsx';
+import Visitor from './Visitor.jsx';
+import Profile from './Profile.jsx';
+import Menu from './Menu.jsx';
 
 const Stack = createNativeStackNavigator();
 const CURRENT_USER_KEY = 'current_user';
@@ -26,7 +28,7 @@ export default function App() {
       try {
         const s = await AsyncStorage.getItem(CURRENT_USER_KEY);
         // Chưa đăng nhập -> Welcome; Đã đăng nhập -> Feed
-        setInitialRoute(s ? 'Feed' : 'Welcome');
+        setInitialRoute(s ? 'Menu' : 'Welcome');
       } catch {
         setInitialRoute('Welcome');
       }
@@ -53,8 +55,10 @@ export default function App() {
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Forgot" component={Forgot} />
         {/* Flow sau đăng nhập */}
-        <Stack.Screen name="Feed" component={Feed} />
-        <Stack.Screen name="Details" component={Details} />
+        <Stack.Screen name="Menu" component={Menu} />
+        <Stack.Screen name="Expert" component={Expert} />
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Visitor" component={Visitor} />
       </Stack.Navigator>
     </NavigationContainer>
   );
