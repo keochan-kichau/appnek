@@ -50,7 +50,7 @@ export default function Login({ navigation }) {
             alt="Logo"
             resizeMode="contain"
             style={styles.headerImg}
-            source={require('../assets/icon.png')}
+            source={require('../../assets/icon.png')}
           />
           <Text>
             <Text style={styles.title}>Welcome </Text>

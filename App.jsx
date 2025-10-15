@@ -6,16 +6,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Screens (đúng vị trí bạn yêu cầu)
-import Welcome from './Welcome.jsx';
-import Login from './screens/Login.jsx';
-import Signup from './screens/Signup.jsx';
-import Forgot from './screens/Forgot.jsx';
+import Welcome from './screens/WelcomeToApp/Welcome.jsx';
+import Login from './screens/DangNhap/Login.jsx';
+import Signup from './screens/DangKi/Signup.jsx';
+import Forgot from './screens/QuenMK/Forgot.jsx';
 
 // Màn sau đăng nhập + chi tiết
-import Expert from './Expert.jsx';
-import Visitor from './Visitor.jsx';
-import Profile from './Profile.jsx';
-import Menu from './Menu.jsx';
+import Expert from './screens/DoanhNghiep/Expert.jsx';
+import Visitor from './screens/DuKhach/Visitor.jsx';
+import Profile from './screens/Profile/Profile.jsx';
+import Menu from './screens/MenuSauLogin/Menu.jsx';
 
 const Stack = createNativeStackNavigator();
 const CURRENT_USER_KEY = 'current_user';

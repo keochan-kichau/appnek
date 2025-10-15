@@ -7,7 +7,7 @@ export default function Welcome({ navigation }) {
     <SafeAreaView style={styles.container}>
       <View style={{ alignItems: 'center', paddingHorizontal: 24 }}>
         <Image
-          source={require('./assets/icon.png')}
+          source={require('../../assets/icon.png')}
           style={{ width: 240, height: 240, marginTop: 24 }}
           resizeMode="contain"
         />
