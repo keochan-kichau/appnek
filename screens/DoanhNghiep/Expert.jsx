@@ -55,17 +55,7 @@ export default function Expert({ navigation }) {
 
           <View style={styles.card}>
             <Text style={styles.cardTitle}>Xuất dữ liệu</Text>
-            <Text style={styles.cardDesc}>
-              Tải CSV/JSON để phân tích sâu hơn.
-            </Text>
-            <View style={{ flexDirection: 'row', gap: 10, marginTop: 8 }}>
-              <TouchableOpacity style={styles.btn}>
-                <Text style={styles.btnText}>Xuất CSV</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.btn}>
-                <Text style={styles.btnText}>Xuất JSON</Text>
-              </TouchableOpacity>
-            </View>
+            <Text style={styles.cardDesc}>Tải JSON để phân tích sâu hơn.</Text>
           </View>
 
           <View style={styles.card}>
