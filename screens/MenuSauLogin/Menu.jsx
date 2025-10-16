@@ -1,9 +1,20 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CURRENT_USER_KEY = 'current_user';
+
+const Card = ({ label, bg, icon, onPress }) => (
+  <TouchableOpacity
+    activeOpacity={0.85}
+    onPress={onPress}
+    style={[styles.card, { backgroundColor: bg }]}
+  >
+    <Text style={styles.cardIcon}>{icon}</Text>
+    <Text style={styles.cardText}>{label}</Text>
+  </TouchableOpacity>
+);
 
 export default function Menu({ navigation }) {
   const onLogout = async () => {
@@ -13,101 +24,98 @@ export default function Menu({ navigation }) {
 
   return (
     <SafeAreaView style={styles.wrap}>
-      <View style={styles.header}>
-        <Text style={styles.title}>BloomIntel</Text>
-        <View style={{ flexDirection: 'row', gap: 10 }}>
-          <TouchableOpacity
-            style={styles.hdrBtn}
-            onPress={() => navigation.navigate('Profile')}
-          >
-            <Text style={styles.hdrBtnText}>Profile</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.hdrBtn} onPress={onLogout}>
-            <Text style={styles.hdrBtnText}>Log out</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      <Text style={styles.subtitle}>Chọn gói dịch vụ</Text>
-
-      <View style={styles.grid}>
-        {/* GÓI DU KHÁCH (CÁ NHÂN) */}
+      {/* header */}
+      <View style={styles.headerRow}>
+        <Text style={styles.title}>Ứng dụng của bạn</Text>
         <TouchableOpacity
-          style={styles.card}
-          activeOpacity={0.9}
-          onPress={() => navigation.navigate('Visitor')}
+          onPress={() => navigation.navigate('Profile')}
+          style={styles.profileBtn}
+          activeOpacity={0.8}
         >
-          <Text style={styles.cardTitle}>Du khách (Cá nhân)</Text>
-          <Text style={styles.cardDesc}>
-            Bản đồ tương tác trạng thái nở hoa theo thời gian thực, tìm kiếm
-            thông minh, thông báo cá nhân hóa.
-          </Text>
-          <View style={styles.pill}>
-            <Text style={styles.pillText}>Bản đồ • Tìm kiếm • Thông báo</Text>
-          </View>
-        </TouchableOpacity>
-
-        {/* GÓI CHUYÊN GIA (DOANH NGHIỆP) */}
-        <TouchableOpacity
-          style={styles.card}
-          activeOpacity={0.9}
-          onPress={() => navigation.navigate('Expert')}
-        >
-          <Text style={styles.cardTitle}>Chuyên gia (Doanh nghiệp)</Text>
-          <Text style={styles.cardDesc}>
-            Dashboard phân tích theo khu vực, xuất CSV/JSON, quyền truy cập API,
-            mô hình hoá kịch bản (nhiệt độ ↑2°C…).
-          </Text>
-          <View style={[styles.pill, { backgroundColor: '#0DB36B15' }]}>
-            <Text style={[styles.pillText, { color: '#0DB36B' }]}>
-              Phân tích • Export • API
-            </Text>
-          </View>
+          <Text style={{ fontSize: 22 }}>👤</Text>
         </TouchableOpacity>
       </View>
+
+      {/* cards */}
+      <Card
+        label="Gói Du khách (Cá nhân)"
+        icon="🧳"
+        bg="#DDF7FB"
+        onPress={() => navigation.navigate('Visitor')}
+      />
+      <Card
+        label="Gói Chuyên gia (Doanh nghiệp)"
+        icon="💼"
+        bg="#CFF3F0"
+        onPress={() => navigation.navigate('Expert')}
+      />
+      <Card
+        label="Xem tin tức của chúng tôi"
+        icon="🌐"
+        bg="#FFF0C9"
+        onPress={() => navigation.navigate('Facebook')}
+      />
+
+      {/* logout */}
+      <TouchableOpacity
+        activeOpacity={0.85}
+        onPress={onLogout}
+        style={[styles.card, styles.logoutCard]}
+      >
+        <Text style={styles.cardIcon}>🏠</Text>
+        <Text style={[styles.cardText, { color: '#0E2036' }]}>Đăng xuất</Text>
+      </TouchableOpacity>
+
+      {/* version */}
+      <Text style={styles.version}>Phiên bản 1.0.0</Text>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  wrap: { flex: 1, backgroundColor: '#F3F7FB' },
-  header: {
-    padding: 16,
+  wrap: { flex: 1, backgroundColor: '#F8FBFD', paddingHorizontal: 20 },
+  headerRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: 8,
+    marginBottom: 18,
   },
-  title: { fontSize: 22, fontWeight: '800', color: '#0E2036' },
-  hdrBtn: {
-    backgroundColor: '#0DB36B',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 10,
+  title: { fontSize: 28, fontWeight: '800', color: '#0E2036' },
+  profileBtn: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#EEF3F7',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  hdrBtnText: { color: '#fff', fontWeight: '700' },
-  subtitle: { paddingHorizontal: 16, color: '#5A6B82', marginBottom: 10 },
-  grid: { padding: 16, gap: 14 },
+
   card: {
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    padding: 16,
-    borderWidth: 1,
-    borderColor: '#E7EEF6',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 22,
+    paddingHorizontal: 18,
+    borderRadius: 18,
+    marginBottom: 14,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 1,
   },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: '800',
+  cardIcon: { fontSize: 32, width: 40, textAlign: 'center', color: '#0E2036' },
+  cardText: {
+    marginLeft: 12,
+    fontSize: 22,
+    fontWeight: '700',
     color: '#0E2036',
-    marginBottom: 6,
   },
-  cardDesc: { color: '#4F5F74' },
-  pill: {
-    alignSelf: 'flex-start',
+
+  logoutCard: { backgroundColor: '#FFFFFF', marginTop: 6 },
+  version: {
+    textAlign: 'center',
+    color: '#98A6B5',
     marginTop: 12,
-    backgroundColor: '#1374F615',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 999,
+    marginBottom: 10,
   },
-  pillText: { fontWeight: '700', color: '#1374F6', fontSize: 12 },
 });
